@@ -21,15 +21,14 @@ def kaitou(lst):
     kesson_list = []
     for i in range(kesson):
         j = randint(0,len(lst))
-        print(j)
         kesson_list.append(lst.pop(j))
     print(lst)
+    a=int(input("欠損文字はいくつあるでしょうか？"))
     
-    a=input("欠損文字はいくつあるでしょうか？")
     if a==kesson:
         print("正解です。それでは具体的に欠損文字を入力してください。")
         for l in range(kesson):
-            ans=input(f"{l}文字目を入力してください")
+            ans=input(f"{l+1}文字目を入力してください")
             if ans in kesson_list:
                 kesson_list.remove(ans)
             else:
