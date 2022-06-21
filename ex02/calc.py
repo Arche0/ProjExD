@@ -20,7 +20,18 @@ def button_click(event):
         entry.delete(0,tk.END)
         a = format(eq,"b")
         entry.insert(tk.END,a)
+    elif num == "8進数":
+        eq = int(entry.get())
+        entry.delete(0,tk.END)
+        a = format(eq,"o")
+        entry.insert(tk.END,a)
+    elif num == "16進数":
+        eq = int(entry.get())
+        entry.delete(0,tk.END)
+        a = format(eq,"x")
+        entry.insert(tk.END,a)
     
+        
     else:  
     #tkm.showinfo("",f"{num}のボタンがクリックされました")
         entry.insert(tk.END,num)
@@ -38,7 +49,7 @@ if __name__ == "__main__":
     entry.grid(row=0,column=0,columnspan=3)
     
     r,c=1,0
-    for i,num in enumerate(["2進数","","","C",
+    for i,num in enumerate(["2進数","8進数","16進数","C",
                             9,8,7,"/",
                             6,5,4,"*",
                             3,2,1,"-",
