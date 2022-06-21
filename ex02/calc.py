@@ -39,7 +39,7 @@ def button_click(event):
 if __name__ == "__main__":
     root = tk.Tk()
     root.geometry("500x700")
-    root.title("電卓")
+    root.title("電卓ちゃん")
     
     entry = tk.Entry(root,
                      justify="right",
