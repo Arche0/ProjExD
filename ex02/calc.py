@@ -12,6 +12,7 @@ def button_click(event):
         res = eval(eqn)
         entry.delete(0,tk.END)
         entry.insert(tk.END,res)
+        
     elif num == "C":
         entry.delete(0,tk.END)
         
@@ -20,26 +21,27 @@ def button_click(event):
         entry.delete(0,tk.END)
         a = format(eq,"b")
         entry.insert(tk.END,a)
+        
     elif num == "8進数":
         eq = int(entry.get())
         entry.delete(0,tk.END)
         a = format(eq,"o")
         entry.insert(tk.END,a)
+        
     elif num == "16進数":
         eq = int(entry.get())
         entry.delete(0,tk.END)
         a = format(eq,"x")
         entry.insert(tk.END,a)
-    
-        
+                
     else:  
-    #tkm.showinfo("",f"{num}のボタンがクリックされました")
         entry.insert(tk.END,num)
+    
     
 if __name__ == "__main__":
     root = tk.Tk()
     root.geometry("500x700")
-    root.title("電卓ちゃん")
+    root.title("電卓")
     
     entry = tk.Entry(root,
                      justify="right",
