@@ -10,8 +10,8 @@ def key_down(event):
 def key_up(event):
     global key
     key = ""
-
-
+   
+    
 def main_proc():
     global cx, cy, mx, my
     delta = { 
@@ -23,11 +23,15 @@ def main_proc():
     }
     if maze_bg[my+delta[key][1]][mx+delta[key][0]] == 0:
         my, mx = my+delta[key][1], mx+delta[key][0]
+        canvas.create_rectangle(cx-50, cy-50, cx+50, cy+50, 
+                                fill="blue" )#通った床を青に。
+        print(mx,my,cx,cy)
+        canvas.create_rectangle(100, 100, 100+100, 100+100, 
+                                    fill="red")#スタート地点を赤に。
     
     cx,cy = mx*100+50, my*100+50
-    canvas.coords("tori", cx, cy)
+    canvas.coords("tori", cx, cy)    
     root.after(100, main_proc)
-    
 
     
 if __name__ == "__main__":
@@ -41,6 +45,7 @@ if __name__ == "__main__":
     
     
     tori = tk.PhotoImage(file="fig/2.png")
+    
     mx, my = 1, 1
     cx,cy = mx*100+50, my*100+50
     canvas.create_image(cx, cy, image=tori, tag="tori")
