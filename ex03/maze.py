@@ -1,4 +1,5 @@
 import tkinter as tk
+import maze_maker as mm
 
 def key_down(event):
     global key
@@ -22,7 +23,7 @@ def main_proc():
     }
     cx, cy = cx+delta[key][0], cy+delta[key][1]
     canvas.coords("tori", cx, cy)
-    root.after(50, main_proc)
+    root.after(100, main_proc)
     
     
     
@@ -32,6 +33,9 @@ if __name__ == "__main__":
     
     canvas = tk.Canvas(root, width=1500, height=900, bg="black")
     canvas.pack()
+    maze_bg = mm.make_maze(15, 9) # 1:壁/2:床を表す二次元リスト
+    mm.show_maze(canvas, maze_bg) 
+    
     
     tori = tk.PhotoImage(file="fig/2.png")
     cx,cy = 300, 400
