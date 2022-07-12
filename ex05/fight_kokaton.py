@@ -1,6 +1,9 @@
+from calendar import c
 import pygame as pg
 import sys
 import random
+
+c = 0 #爆発が実行してないときは０　した後は１
 
 class Screen:
     def __init__(self, title, wh, image):
@@ -45,7 +48,7 @@ class Bird:
             if key_states[pg.K_RIGHT] :
                 self.rct.centerx -= 1
         self.blit(scr)
-            
+ 
 
 class Bomb:
     def __init__(self, color, size, vxy, scr):
@@ -66,24 +69,47 @@ class Bomb:
         self.vx *= yoko
         self.vy *= tate
         self.blit(scr)
-        
+
+
+class Bakuhatu:
+    def __init__(self, chr: Bird):
+        self.sfc = pg.image.load("fig/images.jpg")
+        self.sfc = pg.transform.rotozoom(self.sfc, 0, 10)
+        self.rct = self.sfc.get_rect()
+        self.rct.center = chr.rct.center
+    
+    def blit(self, scr: Screen):
+        scr.sfc.blit(self.sfc, self.rct)
+
+    def update(self, scr: Screen):
+        self.blit(scr)
+ 
         
 def main():
     clock = pg.time.Clock()
-    scr = Screen("Fuckyou!'koukaton'2nd_Edition_ver1,2,5",(1600, 900), "fig/pg_bg.jpg")
+    scr = Screen("こうかとん",(1600, 900), "fig/pg_bg.jpg")
     kkt = Bird("fig/6.png", 2.0, (900, 400))
     bkd = Bomb((255,0,0), 10, (+1, +1), scr)
+    bkh = Bakuhatu(kkt)
     
     while True:
+        global c
         scr.blit()
         for event in pg.event.get():
             if event.type == pg.QUIT: return
+            if event.type == pg.KEYDOWN and event.key == pg.K_SPACE:
+                bkh.update(scr)
+                c += 1
+                
+
+                
         kkt.update(scr)
-        bkd.update(scr)
+        if c == 0:
+            bkd.update(scr)
         if kkt.rct.colliderect(bkd.rct): return 
 
         pg.display.update()
-        clock.tick(1000)
+        clock.tick(100000)
 
 
 def check_bound(rct, scr_rct):
